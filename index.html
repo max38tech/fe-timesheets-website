@@ -633,7 +633,7 @@
                             </div>
                             <div>
                                 <h4>Email</h4>
-                                <p>info@fetimesheets.com</p>
+                                <p id="contact-email-display">info@fetimesheets.com</p>
                             </div>
                         </div>
                         <div class="contact-detail">
@@ -642,7 +642,7 @@
                             </div>
                             <div>
                                 <h4>Phone</h4>
-                                <p>+1 (555) 123-4567</p>
+                                <p id="contact-phone-display">+1 (555) 123-4567</p>
                             </div>
                         </div>
                         <div class="contact-detail">
@@ -651,7 +651,7 @@
                             </div>
                             <div>
                                 <h4>Location</h4>
-                                <p>San Francisco, CA</p>
+                                <p id="contact-location-display">San Francisco, CA</p>
                             </div>
                         </div>
                     </div>
@@ -721,6 +721,18 @@
 
         // Form submission handling
         document.getElementById('demoForm').addEventListener('submit', saveContactForm);
+
+        // Load dynamic content
+        const db = firebase.firestore();
+        const settingsRef = db.collection('settings').doc('main-page');
+        settingsRef.onSnapshot(doc => {
+            if (doc.exists) {
+                const settings = doc.data();
+                document.getElementById('contact-email-display').textContent = settings.contactEmail || '';
+                document.getElementById('contact-phone-display').textContent = settings.contactPhone || '';
+                document.getElementById('contact-location-display').textContent = settings.contactLocation || '';
+            }
+        });
     </script>
 </body>
 </html>
