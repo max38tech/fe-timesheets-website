@@ -8,11 +8,41 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Contact Form Submissions</h2>
-        <a href="admin.html">Back to Admin</a>
-        <div id="contacts-list"></div>
-    </div>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-clock"></i>
+                    FE Timesheets - Admin
+                </a>
+                <ul class="nav-links">
+                    <li><a href="admin.html">Admin Panel</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Form Submissions</h2>
+            </div>
+            <div id="contacts-list"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">
+                    &copy; 2023 FE Timesheets. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>

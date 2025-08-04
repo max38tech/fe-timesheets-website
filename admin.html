@@ -8,48 +8,81 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div id="login-container">
-            <h2>Admin Login</h2>
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" required>
-                </div>
-                <button type="submit" class="btn">Login</button>
-            </form>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-clock"></i>
+                    FE Timesheets - Admin
+                </a>
+                <ul class="nav-links">
+                    <li><a href="contacts.html">Manage Contacts</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
 
-        <div id="admin-panel" style="display: none;">
-            <h2>Admin Panel</h2>
-            <p>Welcome, <span id="user-email"></span>!</p>
-            <a href="contacts.html" class="btn">Manage Contacts</a>
-            <button id="logout-btn" class="btn btn-outline">Logout</button>
+    <main class="section">
+        <div class="container">
+            <div id="login-container">
+                <div class="contact-form" style="max-width: 500px; margin: auto;">
+                    <div class="section-title">
+                        <h2>Admin Login</h2>
+                    </div>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn">Login</button>
+                    </form>
+                </div>
+            </div>
 
-            <div class="content-editor">
-                <h3>Edit Website Content</h3>
-                <form id="content-form">
-                    <div class="form-group">
-                        <label for="contact-email">Contact Email</label>
-                        <input type="email" id="contact-email">
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-phone">Contact Phone</label>
-                        <input type="text" id="contact-phone">
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-location">Contact Location</label>
-                        <input type="text" id="contact-location">
-                    </div>
-                    <button type="submit" class="btn">Save Changes</button>
-                </form>
+            <div id="admin-panel" style="display: none;">
+                <div class="section-title">
+                    <h2>Admin Panel</h2>
+                    <p>Welcome, <span id="user-email"></span>!</p>
+                </div>
+
+                <div class="contact-form" style="max-width: 800px; margin: auto;">
+                    <h3>Edit Website Content</h3>
+                    <form id="content-form">
+                        <div class="form-group">
+                            <label for="contact-email">Contact Email</label>
+                            <input type="email" id="contact-email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-phone">Contact Phone</label>
+                            <input type="text" id="contact-phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-location">Contact Location</label>
+                            <input type="text" id="contact-location" class="form-control">
+                        </div>
+                        <button type="submit" class="btn">Save Changes</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">
+                    &copy; 2023 FE Timesheets. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
