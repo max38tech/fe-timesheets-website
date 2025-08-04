@@ -1,6 +1,6 @@
 const { onDocumentCreated } = require("firebase-functions/v2/firestore");
 const { setGlobalOptions } = require("firebase-functions/v2");
-const { defineSecret } = require("firebase-functions/v2/params");
+const { defineSecret } = require("firebase-functions/params"); // Fixed this line
 const admin = require("firebase-admin");
 const sgMail = require("@sendgrid/mail");
 
