@@ -690,12 +690,12 @@
                     FE Timesheets
                 </a>
                 <p>Streamline your field engineering time tracking and billing</p>
-                <div class="social-links">
+ <!--               <div class="social-links">
                     <a href="#"><i class="fab fa-twitter"></i></a>
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
+                </div> -->
                 <div class="copyright">
                     &copy; 2023 FE Timesheets. All rights reserved.
                 </div>
@@ -703,6 +703,11 @@
         </div>
     </footer>
 
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="firebase.js"></script>
+    <script src="firestore.js"></script>
     <script>
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -715,11 +720,7 @@
         });
 
         // Form submission handling
-        document.getElementById('demoForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your request! We will contact you shortly to schedule your demo.');
-            this.reset();
-        });
+        document.getElementById('demoForm').addEventListener('submit', saveContactForm);
     </script>
 </body>
 </html>
