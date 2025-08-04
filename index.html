@@ -30,8 +30,8 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Streamline Time Tracking for Your Field Engineers</h1>
-            <p>FE Timesheets is the perfect solution for small to medium-sized technical contracting companies. Our mobile-friendly platform makes it easy for engineers to track time and submit timesheets, while clients can quickly approve or deny submissions with one-time use links.</p>
+            <h1 data-editable="hero-h1">Streamline Time Tracking for Your Field Engineers</h1>
+            <p data-editable="hero-p">FE Timesheets is the perfect solution for small to medium-sized technical contracting companies. Our mobile-friendly platform makes it easy for engineers to track time and submit timesheets, while clients can quickly approve or deny submissions with one-time use links.</p>
             <div class="hero-buttons">
                 <a href="#pricing" class="btn">View Pricing</a>
                 <a href="#contact" class="btn btn-outline">Schedule Demo</a>
@@ -43,37 +43,37 @@
     <section id="features" class="section">
         <div class="container">
             <div class="section-title">
-                <h2>Powerful Features</h2>
-                <p>Everything you need to manage time tracking for your field engineers efficiently</p>
+                <h2 data-editable="features-h2">Powerful Features</h2>
+                <p data-editable="features-p">Everything you need to manage time tracking for your field engineers efficiently</p>
             </div>
             <div class="features">
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <h3>Mobile-Friendly</h3>
-                    <p>Engineers can easily track time and submit timesheets directly from their mobile devices, even in the field with limited connectivity.</p>
+                    <h3 data-editable="feature-1-h3">Mobile-Friendly</h3>
+                    <p data-editable="feature-1-p">Engineers can easily track time and submit timesheets directly from their mobile devices, even in the field with limited connectivity.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-envelope"></i>
                     </div>
-                    <h3>Simple Approval</h3>
-                    <p>Clients receive email notifications with one-time use links to quickly review and approve or deny timesheets without complex login processes.</p>
+                    <h3 data-editable="feature-2-h3">Simple Approval</h3>
+                    <p data-editable="feature-2-p">Clients receive email notifications with one-time use links to quickly review and approve or deny timesheets without complex login processes.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-chart-bar"></i>
                     </div>
-                    <h3>Advanced Reporting</h3>
-                    <p>Administrators can generate detailed reports by time period, client, project, or individual engineer to track productivity and billing.</p>
+                    <h3 data-editable="feature-3-h3">Advanced Reporting</h3>
+                    <p data-editable="feature-3-p">Administrators can generate detailed reports by time period, client, project, or individual engineer to track productivity and billing.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-users"></i>
                     </div>
-                    <h3>User Management</h3>
-                    <p>Easy setup and management of multiple users, roles, and permissions to ensure your team works efficiently.</p>
+                    <h3 data-editable="feature-4-h3">User Management</h3>
+                    <p data-editable="feature-4-p">Easy setup and management of multiple users, roles, and permissions to ensure your team works efficiently.</p>
                 </div>
             </div>
         </div>
@@ -83,8 +83,8 @@
     <section id="pricing" class="section pricing">
         <div class="container">
             <div class="section-title">
-                <h2>Simple, Transparent Pricing</h2>
-                <p>Choose the plan that works best for your business</p>
+                <h2 data-editable="pricing-h2">Simple, Transparent Pricing</h2>
+                <p data-editable="pricing-p">Choose the plan that works best for your business</p>
             </div>
             <div class="pricing-cards">
                 <div class="pricing-card">
@@ -132,8 +132,8 @@
     <section id="screenshots" class="section screenshots">
         <div class="container">
             <div class="section-title">
-                <h2>Easy to Use Interface</h2>
-                <p>See how FE Timesheets works in action</p>
+                <h2 data-editable="screenshots-h2">Easy to Use Interface</h2>
+                <p data-editable="screenshots-p">See how FE Timesheets works in action</p>
             </div>
             <div class="screenshot-grid">
                 <div class="screenshot-card">
@@ -153,8 +153,8 @@
     <section id="contact" class="section contact">
         <div class="container">
             <div class="section-title">
-                <h2>Schedule a Demo</h2>
-                <p>Ready to get started? Contact us for a personalized demo</p>
+                <h2 data-editable="contact-h2">Schedule a Demo</h2>
+                <p data-editable="contact-p">Ready to get started? Contact us for a personalized demo</p>
             </div>
             <div class="contact-container">
                 <div class="contact-info">
@@ -257,11 +257,16 @@
         document.getElementById('demoForm').addEventListener('submit', saveContactForm);
 
         // Load dynamic content
-        const db = firebase.firestore();
         const settingsRef = db.collection('settings').doc('main-page');
         settingsRef.onSnapshot(doc => {
             if (doc.exists) {
                 const settings = doc.data();
+                document.querySelectorAll('[data-editable]').forEach(el => {
+                    const key = el.getAttribute('data-editable');
+                    if (settings[key]) {
+                        el.textContent = settings[key];
+                    }
+                });
                 document.getElementById('contact-email-display').textContent = settings.contactEmail || '';
                 document.getElementById('contact-phone-display').textContent = settings.contactPhone || '';
                 document.getElementById('contact-location-display').textContent = settings.contactLocation || '';

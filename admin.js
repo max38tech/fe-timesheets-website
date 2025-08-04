@@ -1,8 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     const contentForm = document.getElementById('content-form');
-    const contactEmailInput = document.getElementById('contact-email');
-    const contactPhoneInput = document.getElementById('contact-phone');
-    const contactLocationInput = document.getElementById('contact-location');
 
     // A reference to the document that stores the website settings
     const settingsRef = db.collection('settings').doc('main-page');
@@ -12,9 +9,16 @@ document.addEventListener('DOMContentLoaded', function() {
         settingsRef.get().then(doc => {
             if (doc.exists) {
                 const settings = doc.data();
-                contactEmailInput.value = settings.contactEmail || '';
-                contactPhoneInput.value = settings.contactPhone || '';
-                contactLocationInput.value = settings.contactLocation || '';
+                document.querySelectorAll('[data-editable]').forEach(el => {
+                    const key = el.getAttribute('data-editable');
+                    const input = document.getElementById(key);
+                    if (input && settings[key]) {
+                        input.value = settings[key];
+                    }
+                });
+                document.getElementById('contact-email').value = settings.contactEmail || '';
+                document.getElementById('contact-phone').value = settings.contactPhone || '';
+                document.getElementById('contact-location').value = settings.contactLocation || '';
             } else {
                 console.log("No settings document found. You can create one by saving the form.");
             }
@@ -26,11 +30,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to save the settings
     const saveSettings = (e) => {
         e.preventDefault();
-        const newSettings = {
-            contactEmail: contactEmailInput.value,
-            contactPhone: contactPhoneInput.value,
-            contactLocation: contactLocationInput.value,
-        };
+        const newSettings = {};
+        document.querySelectorAll('[data-editable]').forEach(el => {
+            const key = el.getAttribute('data-editable');
+            const input = document.getElementById(key);
+            if (input) {
+                newSettings[key] = input.value;
+            }
+        });
+        newSettings.contactEmail = document.getElementById('contact-email').value;
+        newSettings.contactPhone = document.getElementById('contact-phone').value;
+        newSettings.contactLocation = document.getElementById('contact-location').value;
 
         settingsRef.set(newSettings, { merge: true }) // Use merge:true to avoid overwriting other fields if they exist
             .then(() => {
