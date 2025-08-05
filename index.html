@@ -22,6 +22,8 @@
                     <li><a href="#screenshots">Screenshots</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
+                <!-- add spacer to offset fixed header when using in-page anchors -->
+                <div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 0;"></div>
                 <a href="#contact" class="btn">Schedule Demo</a>
             </nav>
         </div>
@@ -135,7 +137,7 @@
                 <h2 data-editable="screenshots-h2">Easy to Use Interface</h2>
                 <p data-editable="screenshots-p">See how FE Timesheets works in action</p>
             </div>
-            <div class="screenshot-grid">
+            <div class="screenshot-grid" id="screenshot-grid">
                 <div class="screenshot-card">
                     <div class="screenshot-placeholder">Mobile App Interface</div>
                 </div>
@@ -148,6 +150,26 @@
             </div>
         </div>
     </section>
+
+    <script>
+      // Simple lightbox for screenshots: click to open full-size
+      document.addEventListener('click', (e) => {
+        const card = e.target.closest('.screenshot-card img, .screenshot-placeholder');
+        if (!card) return;
+        const src = card.getAttribute('data-full-url') || card.src;
+        if (!src) return;
+        const overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:9999;';
+        const img = document.createElement('img');
+        img.src = src;
+        img.style.maxWidth = '95%';
+        img.style.maxHeight = '95%';
+        img.style.boxShadow = '0 10px 30px rgba(0,0,0,0.4)';
+        overlay.appendChild(img);
+        overlay.addEventListener('click', () => overlay.remove());
+        document.body.appendChild(overlay);
+      });
+    </script>
 
     <!-- Contact Section -->
     <section id="contact" class="section contact">
@@ -231,7 +253,7 @@
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div> -->
                 <div class="copyright">
-                    &copy; 2023 FE Timesheets. All rights reserved.
+                    &copy; 2025 FE Timesheets. All rights reserved.
                 </div>
             </div>
         </div>
@@ -240,37 +262,133 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
     <script src="firebase.js"></script>
-    <script src="firestore.js"></script>
+    <!-- Removed missing firestore.js include; inline site scripts handle Firestore access via global db -->
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 });
             });
-        });
 
-        // Form submission handling
-        document.getElementById('demoForm').addEventListener('submit', saveContactForm);
+            // Form submission handling: save to Firestore and send email via Cloud Function
+            const demoForm = document.getElementById('demoForm');
+            if (demoForm) {
+              demoForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const submitBtn = demoForm.querySelector('button[type="submit"]');
+                const origText = submitBtn ? submitBtn.textContent : '';
+                try {
+                  const name = document.getElementById('name').value.trim();
+                  const email = document.getElementById('email').value.trim();
+                  const company = document.getElementById('company').value.trim();
+                  const message = document.getElementById('message').value.trim();
 
-        // Load dynamic content
-        const settingsRef = db.collection('settings').doc('main-page');
-        settingsRef.onSnapshot(doc => {
-            if (doc.exists) {
+                  if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Submitting...';
+                  }
+
+                  // Save to Firestore (optional/audit)
+                  await db.collection('contactRequests').add({
+                    name, email, company, message,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                  });
+
+                  // Call HTTPS function to send email
+                  // When deployed, functions are served under /__/functions. During local emulation, ensure emulator hosting rewrites are set.
+                  const endpoint = '/__/functions/sendContactEmail';
+                  const resp = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, message }),
+                  });
+
+                  if (!resp.ok) {
+                    const errBody = await resp.json().catch(() => ({}));
+                    throw new Error(errBody.error || 'Email send failed');
+                  }
+
+                  alert('Thanks! We will get back to you shortly.');
+                  demoForm.reset();
+                } catch (err) {
+                  console.error('Error submitting contact form:', err);
+                  alert('Failed to submit. Please try again later.');
+                } finally {
+                  if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = origText || 'Submit';
+                  }
+                }
+              });
+            }
+
+            // Load dynamic content
+            const settingsRef = db.collection('settings').doc('main-page');
+            settingsRef.onSnapshot(doc => {
+                if (!doc.exists) return;
+
                 const settings = doc.data();
+
+                // Text bindings
                 document.querySelectorAll('[data-editable]').forEach(el => {
                     const key = el.getAttribute('data-editable');
-                    if (settings[key]) {
-                        el.textContent = settings[key];
+                    if (Object.prototype.hasOwnProperty.call(settings, key)) {
+                        el.textContent = settings[key] ?? el.textContent;
                     }
                 });
-                document.getElementById('contact-email-display').textContent = settings.contactEmail || '';
-                document.getElementById('contact-phone-display').textContent = settings.contactPhone || '';
-                document.getElementById('contact-location-display').textContent = settings.contactLocation || '';
-            }
+
+                // Contact displays
+                const emailEl = document.getElementById('contact-email-display');
+                const phoneEl = document.getElementById('contact-phone-display');
+                const locEl = document.getElementById('contact-location-display');
+                if (emailEl) emailEl.textContent = settings.contactEmail ?? emailEl.textContent;
+                if (phoneEl) phoneEl.textContent = settings.contactPhone ?? phoneEl.textContent;
+                if (locEl) locEl.textContent = settings.contactLocation ?? locEl.textContent;
+
+                // Screenshot thumbnails from Firestore URLs
+                const grid = document.getElementById('screenshot-grid') || document.querySelector('.screenshot-grid');
+                if (grid) {
+                    const cards = Array.from(grid.querySelectorAll('.screenshot-card'));
+                    const urls = [
+                        settings.screenshot1Url || null,
+                        settings.screenshot2Url || null,
+                        settings.screenshot3Url || null
+                    ];
+
+                    urls.forEach((url, idx) => {
+                        const card = cards[idx];
+                        if (!card) return;
+                        if (url) {
+                            let img = card.querySelector('img');
+                            if (!img) {
+                                card.innerHTML = '';
+                                img = document.createElement('img');
+                                img.style.width = '100%';
+                                img.style.height = '100%';
+                                img.style.objectFit = 'cover';
+                                card.appendChild(img);
+                            }
+                            if (img.src !== url) {
+                                img.src = url;
+                            }
+                            img.alt = `Screenshot ${idx + 1}`;
+                            img.setAttribute('data-full-url', url);
+                        } else {
+                            // Ensure placeholder shows if URL missing
+                            if (!card.querySelector('.screenshot-placeholder')) {
+                                card.innerHTML = '<div class="screenshot-placeholder">No image</div>';
+                            }
+                        }
+                    });
+                }
+            });
         });
     </script>
 </body>

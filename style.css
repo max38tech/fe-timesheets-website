@@ -20,6 +20,25 @@
             color: var(--light-text);
             line-height: 1.6;
         }
+
+        /* Reserve space for fixed header so first section never sits underneath */
+        :root {
+            --header-height: 72px;
+        }
+
+        @media (max-width: 768px) {
+            :root { --header-height: 64px; }
+        }
+
+        @media (max-width: 480px) {
+            :root { --header-height: 56px; }
+        }
+
+        /* Push down the document content exactly by header height */
+        body {
+            /* remove the forced padding; sticky header no longer overlays content */
+            padding-top: 0;
+        }
         
         .container {
             width: 90%;
@@ -31,12 +50,17 @@
         /* Header Styles */
         header {
             background-color: rgba(10, 10, 10, 0.9);
-            position: fixed;
-            width: 100%;
+            position: sticky; /* allows mobile browser UI to collapse without covering content */
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            padding: 20px 0;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
             border-bottom: 1px solid rgba(13, 110, 253, 0.2);
+            backdrop-filter: saturate(120%) blur(6px);
+            -webkit-backdrop-filter: saturate(120%) blur(6px);
         }
         
         .navbar {
@@ -106,8 +130,10 @@
         
         /* Hero Section */
         .hero {
-            padding: 150px 0 100px;
+            /* ensure visual separation from sticky header */
+            padding: calc(var(--header-height) + 40px) 0 100px; /* increased by 16px */
             text-align: center;
+            scroll-margin-top: calc(var(--header-height) + 12px);
         }
         
         .hero h1 {
@@ -428,15 +454,19 @@
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
-                gap: 20px;
+                gap: 12px;
             }
-            
+
             .nav-links {
-                gap: 15px;
+                gap: 12px;
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            
+
+            .hero {
+                padding-top: calc(var(--header-height) + 28px); /* +12px */
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -452,6 +482,10 @@
         }
         
         @media (max-width: 480px) {
+            .hero {
+                padding-top: calc(var(--header-height) + 24px); /* +12px */
+            }
+
             .hero h1 {
                 font-size: 2rem;
             }

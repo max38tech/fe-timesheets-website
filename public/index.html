@@ -1,89 +1,394 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FE Timesheets - Time Tracking for Field Engineers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="/" class="logo">
+                    <i class="fas fa-clock"></i>
+                    FE Timesheets
+                </a>
+                <ul class="nav-links">
+                    <li><a href="/#features">Features</a></li>
+                    <li><a href="/#pricing">Pricing</a></li>
+                    <li><a href="/#screenshots">Screenshots</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+                <!-- add spacer to offset fixed header when using in-page anchors -->
+                <div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: 0;"></div>
+                <a href="/#contact" class="btn">Schedule Demo</a>
+            </nav>
+        </div>
+    </header>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/12.0.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/12.0.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/12.0.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/12.0.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/12.0.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/12.0.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/12.0.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/12.0.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/12.0.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/12.0.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 data-editable="hero-h1">Streamline Time Tracking for Your Field Engineers</h1>
+            <p data-editable="hero-p">FE Timesheets is the perfect solution for small to medium-sized technical contracting companies. Our mobile-friendly platform makes it easy for engineers to track time and submit timesheets, while clients can quickly approve or deny submissions with one-time use links.</p>
+            <div class="hero-buttons">
+                <a href="/#pricing" class="btn">View Pricing</a>
+                <a href="/#contact" class="btn btn-outline">Schedule Demo</a>
+            </div>
+        </div>
+    </section>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-editable="features-h2">Powerful Features</h2>
+                <p data-editable="features-p">Everything you need to manage time tracking for your field engineers efficiently</p>
+            </div>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 data-editable="feature-1-h3">Mobile-Friendly</h3>
+                    <p data-editable="feature-1-p">Engineers can easily track time and submit timesheets directly from their mobile devices, even in the field with limited connectivity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 data-editable="feature-2-h3">Simple Approval</h3>
+                    <p data-editable="feature-2-p">Clients receive email notifications with one-time use links to quickly review and approve or deny timesheets without complex login processes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 data-editable="feature-3-h3">Advanced Reporting</h3>
+                    <p data-editable="feature-3-p">Administrators can generate detailed reports by time period, client, project, or individual engineer to track productivity and billing.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 data-editable="feature-4-h3">User Management</h3>
+                    <p data-editable="feature-4-p">Easy setup and management of multiple users, roles, and permissions to ensure your team works efficiently.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-editable="pricing-h2">Simple, Transparent Pricing</h2>
+                <p data-editable="pricing-p">Choose the plan that works best for your business</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>Professional</h3>
+                    <div class="price">$49<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to 10 engineers</li>
+                        <li>Mobile app access</li>
+                        <li>Email approval workflow</li>
+                        <li>Basic reporting</li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <a href="/#contact" class="btn">Get Started</a>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-tag">Most Popular</div>
+                    <h3>Business</h3>
+                    <div class="price">$99<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to 25 engineers</li>
+                        <li>All Professional features</li>
+                        <li>Advanced reporting</li>
+                        <li>Custom branding</li>
+                        <li>Dedicated account manager</li>
+                    </ul>
+                    <a href="/#contact" class="btn">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Self-Hosted</h3>
+                    <div class="price">$999<span>/one-time</span></div>
+                    <ul class="pricing-features">
+                        <li>Unlimited engineers</li>
+                        <li>Full source code access</li>
+                        <li>Deploy on your own infrastructure</li>
+                        <li>Community support</li>
+                        <li>Lifetime updates</li>
+                    </ul>
+                    <a href="/#contact" class="btn">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="section screenshots">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-editable="screenshots-h2">Easy to Use Interface</h2>
+                <p data-editable="screenshots-p">See how FE Timesheets works in action</p>
+            </div>
+            <div class="screenshot-grid" id="screenshot-grid">
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">Mobile App Interface</div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">Approval Workflow</div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">Reporting Dashboard</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
+      // Simple lightbox for screenshots: click to open full-size
+      document.addEventListener('click', (e) => {
+        const card = e.target.closest('.screenshot-card img, .screenshot-placeholder');
+        if (!card) return;
+        const src = card.getAttribute('data-full-url') || card.src;
+        if (!src) return;
+        const overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:9999;';
+        const img = document.createElement('img');
+        img.src = src;
+        img.style.maxWidth = '95%';
+        img.style.maxHeight = '95%';
+        img.style.boxShadow = '0 10px 30px rgba(0,0,0,0.4)';
+        overlay.appendChild(img);
+        overlay.addEventListener('click', () => overlay.remove());
+        document.body.appendChild(overlay);
       });
     </script>
-  </body>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-editable="contact-h2">Schedule a Demo</h2>
+                <p data-editable="contact-p">Ready to get started? Contact us for a personalized demo</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>Our team is here to help you implement FE Timesheets and answer any questions you may have.</p>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p id="contact-email-display">info@fetimesheets.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p id="contact-phone-display">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Location</h4>
+                                <p id="contact-location-display">San Francisco, CA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="demoForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" class="form-control" placeholder="Enter your company name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" placeholder="Tell us about your business and what you're looking for" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="/" class="logo">
+                    <i class="fas fa-clock"></i>
+                    FE Timesheets
+                </a>
+                <p>Streamline your field engineering time tracking and billing</p>
+ <!--               <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div> -->
+                <div class="copyright">
+                    &copy; 2023 FE Timesheets. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
+    <script src="/firebase.js"></script>
+    <!-- Removed missing firestore.js include; inline site scripts handle Firestore access via global db -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Form submission handling: save to Firestore and send email via Cloud Function
+            const demoForm = document.getElementById('demoForm');
+            if (demoForm) {
+              demoForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const submitBtn = demoForm.querySelector('button[type="submit"]');
+                const origText = submitBtn ? submitBtn.textContent : '';
+                try {
+                  const name = document.getElementById('name'). value.trim();
+                  const email = document.getElementById('email'). value.trim();
+                  const company = document.getElementById('company'). value.trim();
+                  const message = document.getElementById('message'). value.trim();
+
+                  if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Submitting...';
+                  }
+
+                  // Save to Firestore (optional/audit)
+                  await db.collection('contactRequests').add({
+                    name, email, company, message,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                  });
+
+                  // Call HTTPS function to send email
+                  const endpoint = '/__/functions/sendContactEmail';
+                  const resp = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, message }),
+                  });
+
+                  if (!resp.ok) {
+                    const errBody = await resp.json().catch(() => ({}));
+                    throw new Error(errBody.error || 'Email send failed');
+                  }
+
+                  alert('Thanks! We will get back to you shortly.');
+                  demoForm.reset();
+                } catch (err) {
+                  console.error('Error submitting contact form:', err);
+                  alert('Failed to submit. Please try again later.');
+                } finally {
+                  if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = origText || 'Submit';
+                  }
+                }
+              });
+            }
+
+            // Load dynamic content
+            const settingsRef = db.collection('settings').doc('main-page');
+            settingsRef.onSnapshot(doc => {
+                if (!doc.exists) return;
+
+                const settings = doc.data();
+
+                // Text bindings
+                document.querySelectorAll('[data-editable]').forEach(el => {
+                    const key = el.getAttribute('data-editable');
+                    if (Object.prototype.hasOwnProperty.call(settings, key)) {
+                        el.textContent = settings[key] ?? el.textContent;
+                    }
+                });
+
+                // Contact displays
+                const emailEl = document.getElementById('contact-email-display');
+                const phoneEl = document.getElementById('contact-phone-display');
+                const locEl = document.getElementById('contact-location-display');
+                if (emailEl) emailEl.textContent = settings.contactEmail ?? emailEl.textContent;
+                if (phoneEl) phoneEl.textContent = settings.contactPhone ?? phoneEl.textContent;
+                if (locEl) locEl.textContent = settings.contactLocation ?? locEl.textContent;
+
+                // Screenshot thumbnails from Firestore URLs
+                const grid = document.getElementById('screenshot-grid') || document.querySelector('.screenshot-grid');
+                if (grid) {
+                    const cards = Array.from(grid.querySelectorAll('.screenshot-card'));
+                    const urls = [
+                        settings.screenshot1Url || null,
+                        settings.screenshot2Url || null,
+                        settings.screenshot3Url || null
+                    ];
+
+                    urls.forEach((url, idx) => {
+                        const card = cards[idx];
+                        if (!card) return;
+                        if (url) {
+                            let img = card.querySelector('img');
+                            if (!img) {
+                                card.innerHTML = '';
+                                img = document.createElement('img');
+                                img.style.width = '100%';
+                                img.style.height = '100%';
+                                img.style.objectFit = 'cover';
+                                card.appendChild(img);
+                            }
+                            if (img.src !== url) {
+                                img.src = url;
+                            }
+                            img.alt = `Screenshot ${idx + 1}`;
+                            img.setAttribute('data-full-url', url);
+                        } else {
+                            // Ensure placeholder shows if URL missing
+                            if (!card.querySelector('.screenshot-placeholder')) {
+                                card.innerHTML = '<div class="screenshot-placeholder">No image</div>';
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
 </html>

@@ -23,7 +23,34 @@
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
-    ]
+      "**/node_modules/**",
+      "functions/**"
+    ],
+    "rewrites": [
+      { "source": "/__/functions/sendContactEmail", "function": "sendContactEmail" },
+      { "source": "/admin", "destination": "/admin.html" },
+      { "source": "/contacts", "destination": "/contacts.html" },
+      { "source": "/seed", "destination": "/seed.html" }
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=300" },
+          { "key": "X-Robots-Tag", "value": "noindex" }
+        ]
+      },
+      {
+        "source": "/__/functions/**",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-store" }
+        ]
+      }
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }

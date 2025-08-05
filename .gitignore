@@ -25,4 +25,6 @@ firebase.js
 *.ntvs*
 *.njsproj
 *.sln
+d.env
 sendgrid.env
+

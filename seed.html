@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seed Firestore - FE Timesheets</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .seed-container { max-width: 720px; margin: 48px auto; padding: 24px; background: #fff; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+    .seed-log { background:#0b1020; color:#d8e1ff; padding:12px; border-radius:6px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 13px; line-height: 1.5; max-height: 260px; overflow:auto; }
+    .seed-actions { display:flex; gap:12px; flex-wrap: wrap; }
+    .note { font-size: 0.95rem; color:#555; }
+    .danger { background:#8b0000 !important; border-color:#8b0000 !important; }
+    .muted { opacity: 0.72; }
+    .ok { color: #0a7b34; }
+    .err { color: #ff7272; }
+    .pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; background:#eef2ff; color:#223; border:1px solid #c7d2fe; vertical-align: middle; }
+  </style>
+</head>
+<body>
+  <main class="section">
+    <div class="container">
+      <div class="seed-container">
+        <h2>Seed Firestore Placeholder Content</h2>
+        <p class="note">
+          This tool writes placeholder content into Firestore so the website has default text and contact details.
+          You must be signed in as an allowed admin to proceed.
+        </p>
+
+        <div style="margin: 12px 0;">
+          <span class="pill" id="auth-state">Checking auth…</span>
+        </div>
+
+        <div class="seed-actions" style="margin:16px 0 8px;">
+          <button id="seed-btn" class="btn" disabled>Seed Placeholder Content</button>
+          <button id="wipe-btn" class="btn danger" disabled title="Danger: Deletes the settings/main-page document only.">Delete Seeded Doc</button>
+          <a href="/admin.html" class="btn btn-outline">Go to Admin</a>
+          <a href="/" class="btn btn-outline">View Site</a>
+        </div>
+
+        <p class="note muted">
+          What gets written: settings/main-page with hero, features, pricing, screenshots and contact fields.
+        </p>
+
+        <div class="seed-log" id="log" aria-live="polite"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+  <script src="/firebase.js"></script>
+  <script src="/seed.js"></script>
+</body>
+</html>
